@@ -11,7 +11,11 @@ class TeamsController < ApplicationController
 
   # GET: /signup
   get "/signup" do
-    erb :"/teams/signup"
+    if !logged_in?
+      erb :"/teams/signup"
+    else
+      redirect "/drivers"
+    end
   end
 
   # GET: /teams/5

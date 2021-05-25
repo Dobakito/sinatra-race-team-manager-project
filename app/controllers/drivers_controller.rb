@@ -2,7 +2,7 @@ class DriversController < ApplicationController
 
   # GET: /drivers
   get "/drivers" do
-    erb :"/drivers/index"
+    erb :"/drivers/drivers"
   end
 
   # GET: /drivers/new
