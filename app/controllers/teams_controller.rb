@@ -1,18 +1,17 @@
 class TeamsController < ApplicationController
 
-  # GET: /teams
-  get "/teams" do
-    erb :"/teams/index"
+  # GET: /login
+  get "/login" do
+    if !logged_in?
+      erb :"/teams/login"
+    else
+      redirect "/drivers"
+    end
   end
 
-  # GET: /teams/new
-  get "/teams/new" do
-    erb :"/teams/new"
-  end
-
-  # POST: /teams
-  post "/teams" do
-    redirect "/teams"
+  # GET: /signup
+  get "/signup" do
+    erb :"/teams/signup"
   end
 
   # GET: /teams/5
@@ -20,18 +19,23 @@ class TeamsController < ApplicationController
     erb :"/teams/show"
   end
 
-  # GET: /teams/5/edit
-  get "/teams/:id/edit" do
+  # POST: /signup
+  post "/signup" do
     erb :"/teams/edit.html"
   end
 
-  # PATCH: /teams/5
-  patch "/teams/:id" do
-    redirect "/teams/:id"
+  # POST: /login
+  post "/login" do
+    redirect "/drivers"
   end
 
-  # DELETE: /teams/5/delete
-  delete "/teams/:id/delete" do
-    redirect "/teams"
+  # GET: /logout
+  get "/logout" do
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 end
