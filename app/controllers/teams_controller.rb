@@ -20,17 +20,34 @@ class TeamsController < ApplicationController
 
   # GET: /teams/5
   get "/teams/:id" do
-    erb :"/teams/show"
+    if logged_in?
+      @team = Team.find_by(id: params[:id])
+      erb :"/teams/show"
+    else
+      redirect "/login"
+    end
   end
 
   # POST: /signup
   post "/signup" do
-    erb :"/teams/edit.html"
+    if params[:name] == "" || params[:email] == "" || params[:password] == ""
+      redirect "/signup"
+    else
+      @team = Team.create(:name => params[:name], :email => params[:email], :password => params[:password])
+      session[:user_id] = @team.id
+      redirect "/drivers"
+    end
   end
 
   # POST: /login
   post "/login" do
-    redirect "/drivers"
+    @team = Team.find_by(:username => params[:username])
+     if @team && @team.authenticate(params[:password])
+       session[:user_id] = @team.id
+       redirect "/drivers"
+     else
+       redirect "/login"
+     end
   end
 
   # GET: /logout
