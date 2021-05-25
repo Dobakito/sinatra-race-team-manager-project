@@ -2,12 +2,12 @@ class DriversController < ApplicationController
 
   # GET: /drivers
   get "/drivers" do
-    erb :"/drivers/index.html"
+    erb :"/drivers/index"
   end
 
   # GET: /drivers/new
   get "/drivers/new" do
-    erb :"/drivers/new.html"
+    erb :"/drivers/new"
   end
 
   # POST: /drivers
@@ -17,12 +17,12 @@ class DriversController < ApplicationController
 
   # GET: /drivers/5
   get "/drivers/:id" do
-    erb :"/drivers/show.html"
+    erb :"/drivers/show"
   end
 
   # GET: /drivers/5/edit
   get "/drivers/:id/edit" do
-    erb :"/drivers/edit.html"
+    erb :"/drivers/edit"
   end
 
   # PATCH: /drivers/5

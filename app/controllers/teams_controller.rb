@@ -1,37 +1,37 @@
 class TeamsController < ApplicationController
 
-  # GET: /teamscontrollers
-  get "/teamscontrollers" do
-    erb :"/teamscontrollers/index.html"
+  # GET: /teams
+  get "/teams" do
+    erb :"/teams/index"
   end
 
-  # GET: /teamscontrollers/new
-  get "/teamscontrollers/new" do
-    erb :"/teamscontrollers/new.html"
+  # GET: /teams/new
+  get "/teams/new" do
+    erb :"/teams/new"
   end
 
-  # POST: /teamscontrollers
-  post "/teamscontrollers" do
-    redirect "/teamscontrollers"
+  # POST: /teams
+  post "/teams" do
+    redirect "/teams"
   end
 
-  # GET: /teamscontrollers/5
-  get "/teamscontrollers/:id" do
-    erb :"/teamscontrollers/show.html"
+  # GET: /teams/5
+  get "/teams/:id" do
+    erb :"/teams/show"
   end
 
-  # GET: /teamscontrollers/5/edit
-  get "/teamscontrollers/:id/edit" do
-    erb :"/teamscontrollers/edit.html"
+  # GET: /teams/5/edit
+  get "/teams/:id/edit" do
+    erb :"/teams/edit.html"
   end
 
-  # PATCH: /teamscontrollers/5
-  patch "/teamscontrollers/:id" do
-    redirect "/teamscontrollers/:id"
+  # PATCH: /teams/5
+  patch "/teams/:id" do
+    redirect "/teams/:id"
   end
 
-  # DELETE: /teamscontrollers/5/delete
-  delete "/teamscontrollers/:id/delete" do
-    redirect "/teamscontrollers"
+  # DELETE: /teams/5/delete
+  delete "/teams/:id/delete" do
+    redirect "/teams"
   end
 end
