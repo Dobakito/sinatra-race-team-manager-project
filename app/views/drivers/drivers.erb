@@ -1,10 +1,15 @@
 <div class="container">
   <header><img src="images/cover.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
-    <h2>PAGE NAME</h2>
+    <h2>All Drivers in the league</h2>
 
     <div class="content">
-      <p></p>
+      <ul>
+        <%@driver.each do |driver|%>
+        <li>driver.name</li>
+        <li>driver.class</li>
+        <%end%>
+      </ul>
     </div>
 
 

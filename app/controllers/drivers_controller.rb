@@ -3,8 +3,7 @@ class DriversController < ApplicationController
   # GET: /drivers
   get "/drivers" do
     if logged_in?
-      @team = Team.find{|team| team.id == session[:user_id]}
-      @drivers = Driver.find {|driver| driver.id == @team.id}
+      @driver = Driver.all
       erb :"/drivers/drivers"
     else
       redirect "/login"

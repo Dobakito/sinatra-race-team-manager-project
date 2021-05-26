@@ -1,10 +1,23 @@
 <div class="container">
   <header><img src="images/cover.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
-    <h2>PAGE NAME</h2>
+    <h2>Create a driver for your Team</h2>
 
     <div class="content">
-      <p></p>
+      <form action="/drivers" method="post">
+        <label for="name">Driver Name</label>
+        <input type="text" name="name" value="name">
+        <br>
+        <p>Select the Drivers Class</p>
+          <label for="shifter">Shifter</label>
+          <input type="radio" name="class" value="shifter">
+          <label for="senior">Senior</label>
+          <input type="radio" name="class" value="senior">
+          <label for="junior">Junior</label>
+          <input type="radio" name="class" value="junior">
+        <br>
+        <input type="submit" value="Create Driver">
+      </form>
     </div>
 
 
