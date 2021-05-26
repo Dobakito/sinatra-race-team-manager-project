@@ -2,31 +2,64 @@ class DriversController < ApplicationController
 
   # GET: /drivers
   get "/drivers" do
-    erb :"/drivers/drivers"
+    if logged_in?
+      @team = Team.find{|team| team.id == session[:user_id]}
+      @drivers = Driver.find {|driver| driver.id == @team.id}
+      erb :"/drivers/drivers"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /drivers/new
   get "/drivers/new" do
-    erb :"/drivers/new"
+    if logged_in?
+      erb :"/drivers/new"
+    else
+      redirect "/login"
+    end
   end
 
   # POST: /drivers
   post "/drivers" do
-    redirect "/drivers"
+    if logged_in? && params[:name] != "" && params[:class] != ""
+      @driver = Driver.create(name: params[:name], class: params[:class])
+      @team = current_user
+      @team.drivers << @driver
+      redirect "/drivers/#{@driver.id}"
+    else
+      redirect "/drivers/new"
+    end
   end
 
   # GET: /drivers/5
   get "/drivers/:id" do
-    erb :"/drivers/show"
+    if logged_in?
+      @driver = Driver.find_by(id: params[:id])
+      erb :"/drivers/show"
+    else
+      redirect "/login"
+    end
   end
 
   # GET: /drivers/5/edit
   get "/drivers/:id/edit" do
-    erb :"/drivers/edit"
+    if logged_in?
+      @driver = Driver.find_by(id: params[:id])
+      if @driver && @driver.team == current_user
+        erb :"/drivers/edit"
+      else
+        redirect "/drivers/#{@driver.id}"
+      end
+    else
+      redirect "/login"
+    end
   end
 
   # PATCH: /drivers/5
   patch "/drivers/:id" do
+    @driver = Driver.find_by(id: params[:id])
+    @driver.update(name: params[:name], class: params[:class])
     redirect "/drivers/:id"
   end
 
