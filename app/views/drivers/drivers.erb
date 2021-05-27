@@ -1,15 +1,18 @@
 <div class="container">
-  <header><img src="images/cover.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
     <h2>All Drivers in the league</h2>
 
     <div class="content">
       <ul>
+        <!-- show drivers organized by class -->
         <%@driver.each do |driver|%>
-        <li>driver.name</li>
-        <li>driver.class</li>
+        <li><h5><%=driver.name%></h5></li>
+        <li><h6><%=driver.number%></h6></li>
+        <li><h6><%=driver.driver_class%></h6></li>
+        <br>
         <%end%>
       </ul>
+      <a href="/drivers/new">Create a New Driver</a>
     </div>
 
 

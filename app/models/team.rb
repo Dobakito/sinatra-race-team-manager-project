@@ -1,3 +1,3 @@
-class TEAM < ActiveRecord::Base
+class Team < ActiveRecord::Base
   has_many :drivers
 end

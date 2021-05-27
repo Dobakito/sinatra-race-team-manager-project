@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
 
   # POST: /signup
   post "/signup" do
-    if params[:name] == "" || params[:email] == "" || params[:password] == ""
+    if params[:name] == nil || params[:email] == nil || params[:password] == nil
       redirect "/signup"
     else
       @team = Team.create(:name => params[:name], :email => params[:email], :password => params[:password])
@@ -41,7 +41,7 @@ class TeamsController < ApplicationController
 
   # POST: /login
   post "/login" do
-    @team = Team.find_by(:username => params[:username])
+    @team = Team.find_by(:name=> params[:name])
      if @team && @team.authenticate(params[:password])
        session[:user_id] = @team.id
        redirect "/drivers"

@@ -21,8 +21,8 @@ class DriversController < ApplicationController
 
   # POST: /drivers
   post "/drivers" do
-    if logged_in? && params[:name] != "" && params[:class] != ""
-      @driver = Driver.create(name: params[:name], class: params[:class])
+    if logged_in? && params[:name] != nil && params[:driver_class] != nil && params[:number] != nil
+      @driver = Driver.create(name: params[:name], driver_class: params[:driver_class], number: params[:number])
       @team = current_user
       @team.drivers << @driver
       redirect "/drivers/#{@driver.id}"
@@ -41,6 +41,22 @@ class DriversController < ApplicationController
     end
   end
 
+  # DELETE: /drivers/5/delete
+  delete "/drivers/:id/delete" do
+    if logged_in?
+      @driver = Driver.find(params[:id])
+      @team = Team.find_by(id: params[:id])
+      if @driver.team == Team.find{|team| team.id == session[:user_id]}
+        @driver.delete
+        redirect "/teams/#{@team.id}"
+      else
+        redirect "/drivers"
+      end
+    else
+      redirect "/login"
+  end
+end
+
   # GET: /drivers/5/edit
   get "/drivers/:id/edit" do
     if logged_in?
@@ -57,13 +73,19 @@ class DriversController < ApplicationController
 
   # PATCH: /drivers/5
   patch "/drivers/:id" do
+    @team = Team.find{|team| team.id == session[:user_id]}
     @driver = Driver.find_by(id: params[:id])
-    @driver.update(name: params[:name], class: params[:class])
-    redirect "/drivers/:id"
+    if @driver.team.include?(@team)
+      if params[:name] != "" && params[:class] != "" && params[:driver_class] != ""
+        @driver.update(name: params[:name], class: params[:class])
+        redirect "/drivers/#{@driver.id}"
+      else
+        redirect "/drivers/#{@driver.id}/edit"
+      end
+    else
+      redirect "/drivers"
+    end
   end
 
-  # DELETE: /drivers/5/delete
-  delete "/drivers/:id/delete" do
-    redirect "/drivers"
-  end
+
 end

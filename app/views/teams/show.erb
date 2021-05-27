@@ -1,15 +1,17 @@
 <div class="container">
-  <header><img src="images/cover.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
     <h2><%=@team.name%>'s drivers</h2>
 
     <div class="content">
       <ul>
-        <%@team.each do |team|%>
-        <%# add a link to each driver listing %>
-        <li><%=team.drivers%></li>
+         <!-- add a link for each driver listing to view their driver page  -->
+        <%@team.drivers.each do |driver|%>
+        <li><%=driver.name%></li>
         <%end%>
       </ul>
+      <br>
+      <br>
+      <a href="/drivers">View all Drivers</a>
     </div>
 
 

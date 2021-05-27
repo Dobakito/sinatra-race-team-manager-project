@@ -1,11 +1,23 @@
 <div class="container">
-  <header><img src="images/cover.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
-    <h2>PAGE NAME</h2>
+    <h2>View Driver</h2>
 
     <div class="content">
-      <p></p>
+      <h3><%=@driver.name%></h3>
+      <br>
+      <h3><%=@driver.number%></h3>
+      <br>
+      <h3><%=@driver.driver_class%></h3>
+      <br>
+      <h3><%=@driver.team%></h3>
+      <a href="/drivers">View All Drivers</a>
+      <a href="/drivers/new">Create a Driver</a>
+    <form action="/drivers/<%=@driver.id%>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Driver">
+    </form>
     </div>
+
 
 
   </div>

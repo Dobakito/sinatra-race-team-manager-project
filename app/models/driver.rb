@@ -1,3 +1,3 @@
-class DRIVER < ActiveRecord::Base
+class Driver < ActiveRecord::Base
   belongs_to :team
 end
