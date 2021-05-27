@@ -14,7 +14,8 @@ class TeamsController < ApplicationController
       @teams = Team.all
       erb :"/teams/teams"
     else
-      redirect :/login
+      redirect "/login"
+    end
   end
 
   # GET: /signup
