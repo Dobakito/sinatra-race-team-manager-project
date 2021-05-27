@@ -30,12 +30,15 @@ class TeamsController < ApplicationController
 
   # POST: /signup
   post "/signup" do
+    binding.pry
     if params[:name] == nil || params[:email] == nil || params[:password] == nil
       redirect "/signup"
+    elsif Team.find_by(name: params[:name]) != nil
+        redirect "/signup"
     else
-      @team = Team.create(:name => params[:name], :email => params[:email], :password => params[:password])
-      session[:user_id] = @team.id
-      redirect "/drivers"
+        @team = Team.create(:name => params[:name], :email => params[:email], :password => params[:password])
+        session[:user_id] = @team.id
+        redirect "/drivers"
     end
   end
 

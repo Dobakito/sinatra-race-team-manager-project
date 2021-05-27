@@ -3,6 +3,7 @@ class DriversController < ApplicationController
   # GET: /drivers
   get "/drivers" do
     if logged_in?
+      @team = Team.find{|team| team.id == session[:user_id]}
       @driver = Driver.all
       erb :"/drivers/drivers"
     else
@@ -75,10 +76,10 @@ end
   patch "/drivers/:id" do
     @team = Team.find{|team| team.id == session[:user_id]}
     @driver = Driver.find_by(id: params[:id])
-    if @driver.team.include?(@team)
-      if params[:name] != "" && params[:class] != "" && params[:driver_class] != ""
-        @driver.update(name: params[:name], class: params[:class])
-        redirect "/drivers/#{@driver.id}"
+    if @driver.team == @team
+      if params[:name] != nil && params[:driver_class] != nil && params[:number] != nil
+          @driver.update(name: params[:name], driver_class: params[:driver_class], number: params[:number])
+          redirect "/drivers/#{@driver.id}"
       else
         redirect "/drivers/#{@driver.id}/edit"
       end
@@ -86,6 +87,4 @@ end
       redirect "/drivers"
     end
   end
-
-
 end

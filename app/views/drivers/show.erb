@@ -9,9 +9,11 @@
       <br>
       <h3><%=@driver.driver_class%></h3>
       <br>
-      <h3><%=@driver.team%></h3>
+      <h3><%=@driver.team.name%></h3>
+      <br>
       <a href="/drivers">View All Drivers</a>
       <a href="/drivers/new">Create a Driver</a>
+      <a href="/drivers/<%=@driver.id%>/edit">Edit this driver</a>
     <form action="/drivers/<%=@driver.id%>/delete" method="post">
       <input id="hidden" type="hidden" name="_method" value="delete">
       <input type="submit" value="Delete Driver">

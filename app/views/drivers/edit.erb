@@ -1,9 +1,35 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
-    <h2>PAGE NAME</h2>
+    <h2>Edit Driver Info</h2>
 
     <div class="content">
-      <p></p>
+      <form action="/drivers/<%=@driver.id%>" method="post">
+        <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+        <label for="name">Driver Name </label>
+        <input type="text" name="name" value="<%=@driver.name%>">
+        <br>
+        <br>
+        <label for="number">Driver Number </label>
+        <input type="text" name="number" value="<%=@driver.number%>">
+        <br>
+        <br>
+        <label for="shifter">Edit Driver Class: Shifter -> </label>
+        <input type="radio" name="driver_class" value="Shifter">
+        <label for="senior"> Senior -> </label>
+        <input type="radio" name="driver_class" value="Senior">
+        <label for="junior"> Junior -> </label>
+        <input type="radio" name="driver_class" value="Junior">
+        <br>
+        <br>
+        <input type="submit" name="Edit Driver">
+      </form>
+      <br>
+      <a href="/drivers">View all Drivers</a>
+      <form action="/drivers/<%=@driver.id%>/delete" method="post">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Driver">
+      </form>
     </div>
 
 

@@ -4,15 +4,18 @@
 
     <div class="content">
       <ul>
-        <!-- show drivers organized by class -->
         <%@driver.each do |driver|%>
         <li><h5><%=driver.name%></h5></li>
         <li><h6><%=driver.number%></h6></li>
         <li><h6><%=driver.driver_class%></h6></li>
+        <li><h6><%=driver.team.name%></h6></li>
+        <h6><a href="/drivers/<%=driver.id%>/edit">Edit This Driver</a></h6>
         <br>
         <%end%>
       </ul>
       <a href="/drivers/new">Create a New Driver</a>
+      <a href="/logout">Logout</a>
+      <a href="/teams/<%=@team.id%>">View your Team</a>
     </div>
 
 

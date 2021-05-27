@@ -4,11 +4,14 @@
 
     <div class="content">
       <ul>
-         <!-- add a link for each driver listing to view their driver page  -->
         <%@team.drivers.each do |driver|%>
         <li><%=driver.name%></li>
-        <%end%>
+        <li><%=driver.driver_class%></li>
+        <li><%=driver.number%></li>
+        <li><a href="/drivers/<%=driver.id%>/edit">Edit This Driver</a></li>
+        <br>
       </ul>
+      <%end%>
       <br>
       <br>
       <a href="/drivers">View all Drivers</a>
