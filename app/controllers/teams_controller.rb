@@ -10,6 +10,7 @@ class TeamsController < ApplicationController
   end
 
   get "/teams" do
+    binding.pry
     if logged_in?
       @teams = Team.all
       erb :"/teams/teams"
@@ -39,24 +40,24 @@ class TeamsController < ApplicationController
 
   # POST: /signup
   post "/signup" do
-    # binding.pry
-    if params[:name] == nil || params[:email] == nil || params[:password_digest] == nil
+    if params[:name] == nil || params[:email] == nil || params[:password] == nil
       redirect "/signup"
-    elsif Team.find_by(name: params[:name]) != nil
+    elsif Team.find_by(name: params[:name])
         redirect "/signup"
     else
-        @team = Team.create(:name => params[:name], :email => params[:email], :password_digest => params[:password_digest])
-        session[:user_id] = @team.id
+        @team = Team.create(:name => params[:name], :email => params[:email], :password => params[:password])
+        login(@team.id)
         redirect "/teams"
     end
   end
 
   # POST: /login
   post "/login" do
-    @team = Team.find_by(:name=> params[:name])
-     if @team && @team.authenticate(params[:password_digest])
-       session[:user_id] = @team.id
-       redirect "/drivers"
+    @team = Team.find_by(:name => params[:name])
+     if @team && @team.authenticate(params[:password])
+       login(@team.id)
+       binding.pry
+       redirect "/teams"
      else
        redirect "/login"
      end
