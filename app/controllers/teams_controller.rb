@@ -10,7 +10,6 @@ class TeamsController < ApplicationController
   end
 
   get "/teams" do
-    binding.pry
     if logged_in?
       @teams = Team.all
       erb :"/teams/teams"
@@ -24,7 +23,7 @@ class TeamsController < ApplicationController
     if !logged_in?
       erb :"/teams/signup"
     else
-      redirect "/drivers"
+      redirect "/teams"
     end
   end
 
@@ -56,7 +55,6 @@ class TeamsController < ApplicationController
     @team = Team.find_by(:name => params[:name])
      if @team && @team.authenticate(params[:password])
        login(@team.id)
-       binding.pry
        redirect "/teams"
      else
        redirect "/login"

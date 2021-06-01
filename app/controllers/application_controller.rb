@@ -6,6 +6,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "my_secret"
+    # use Rack::Session::Pool
     # use Rack::Session::Cookie, :key => 'rack.session',
     #                        :path => '/',
     #                        :secret => 'your_secret'

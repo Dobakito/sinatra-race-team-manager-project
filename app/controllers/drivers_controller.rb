@@ -46,10 +46,9 @@ class DriversController < ApplicationController
   delete "/drivers/:id/delete" do
     if logged_in?
       @driver = Driver.find(params[:id])
-      @team = Team.find_by(id: params[:id])
       if @driver.team == Team.find{|team| team.id == session[:user_id]}
         @driver.delete
-        redirect "/teams/#{@team.id}"
+        redirect "/teams"
       else
         redirect "/drivers"
       end
